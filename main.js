@@ -95,7 +95,7 @@ var mainState = {
     var middleBottom = game.add.sprite(100, 240, 'wallH', 0, this.walls);
     middleBottom.scale.setTo(1.5, 1);
 
-    this.walls.setAll('body.immovable', true);
+    // this.walls.setAll('body.immovable', true);
   },
 
   playerDie: function() {
