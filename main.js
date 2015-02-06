@@ -10,6 +10,7 @@ var mainState = {
     game.load.image('player', 'assets/player.png');
     game.load.image('wallV', 'assets/wallVertical.png');
     game.load.image('wallH', 'assets/wallHorizontal.png');
+    game.load.image('coin', 'assets/coin.png');
   },
 
   create: function () {
@@ -37,6 +38,19 @@ var mainState = {
     this.cursor = game.input.keyboard.createCursorKeys();
 
     this.createWorld();
+
+    // coins ----------------------------------------------
+
+    this.coin = game.add.sprite(60, 140, 'coin');
+    game.physics.arcade.enable(this.coin);
+    this.coin.anchor.setTo(0.5, 0.5);
+
+    // score ----------------------------------------------
+
+    this.scoreLabel = game.add.text(30, 30, 'score: 0',
+      { font: '18px Arial', fill: '#ffffff' });
+
+    this.score = 0;
   },
 
   update: function () {
@@ -45,6 +59,9 @@ var mainState = {
 
     game.physics.arcade.collide(this.player, this.walls);
     this.movePlayer();
+    if(!this.player.inWorld) {
+      this.playerDie();
+    }
   },
 
   movePlayer: function () {
@@ -100,7 +117,7 @@ var mainState = {
 
   playerDie: function() {
     console.log("player dead");
-    game.start.start('main');
+    game.state.start('main');
   },
 
 };
